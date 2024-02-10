@@ -6,7 +6,7 @@ The BaseModel class contain attr and method common to all classes
 """
 import uuid
 from datetime import datetime
-
+from models import storage
 
 class BaseModel:
     """
