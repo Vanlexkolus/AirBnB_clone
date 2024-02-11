@@ -60,10 +60,10 @@ class BaseModel:
         updates the public instance attribute updated_at
         with the current datetime
         """
-        # from models import storage
-        storage.save()
+        from models import storage
         self.updated_at = datetime.now()
-        # models.storage.new(self)
+        storage.save()
+        #models.storage.new(self)
         
 
 
