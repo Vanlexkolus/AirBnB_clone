@@ -47,6 +47,12 @@ class BaseModel:
         [<class name>] (<self.id>) <self.__dict__>
         """
         return (f"{[self.__class__.__name__]}, ({self.id}), {self.__dict__}")
+    
+    def __repr__(self):
+        """
+        return string representation
+        """
+        return (self.__str__())
 
     def save(self):
         """
