@@ -1,4 +1,4 @@
-This is the readme file for this repository.
+This is the first phase of AIrbnb clone. This repository holds a command interpreter and classes (BaseModel class and several other classes that oinherit from it). The command interpreter lije shell can be ativated, take in user input, and perform certain task to manipulate the object instance.
 
 In this repository, we are expected to know the following:
 
