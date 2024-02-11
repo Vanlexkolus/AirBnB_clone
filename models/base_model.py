@@ -6,7 +6,7 @@ The BaseModel class contain attr and method common to all classes
 """
 from uuid import uuid4
 from datetime import datetime
-import models
+#import models
 
 
 class BaseModel:
@@ -52,7 +52,7 @@ class BaseModel:
         updates the public instance attribute updated_at
         with the current datetime
         """
-        from models import storage
+        #from models import storage
         self.updated_at = datetime.now()
         #models.storage.new(self)
         #models.storage.save()
@@ -62,7 +62,8 @@ class BaseModel:
         returns a dictionary containing all keys/values
         of __dict__ of the instance:
         """
-        self.__dict__["__class__"] = self.__class__.__name__
-        self.__dict__['created_at'] = self.created_at.isoformat()
-        self.__dict__['updated_at'] = self.updated_at.isoformat()
-        return self.__dict__
+        obj_dict = self.__dict__.copy()
+        obj_dict['__class__'] = self.__class__.__name__
+        obj_dict['created_at'] = self.created_at.isoformat()
+        obj_dict['updated_at'] = self.updated_at.isoformat()
+        return obj_dict
