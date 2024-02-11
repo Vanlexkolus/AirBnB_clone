@@ -12,6 +12,11 @@ class FileStorage:
     class attr:
         __file_path
         __objects
+    Methods:
+        all(self)
+        new(self, obj)
+        save(self)
+        reload(self)
     """
 
     __file_path = "file.json"
@@ -19,23 +24,23 @@ class FileStorage:
 
     def all(self):
         """Return the dictionary __object"""
-        return cls.__objects
+        return self.__objects
 
     def new(self, obj):
         """set in __object:
             the obj with the key <obj class name>.id
         """
-        key = __class__.__name__.id
-        cls.__objects[key] = obj
+        key = "{}.{}".format(__class__.__name__, obj.id)
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """serilaize __object to JSOn file"""
-        json_string = json.dumps(cls.__objects)
-        with open('cls.__file_path', 'w') as f:
+        json_string = json.dumps(FileStorage.__objects)
+        with open(FileStorage.__file_path, 'w') as f:
             f.write(json_string)
 
     def reload(self):
         """deserialize the Json file to __objects"""
-        if os.path.exists('cls.__file_path'):
-            with open('cls.__file_path', 'r') as f:
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r') as f:
                 json_dict = json.loads(f.read())
