@@ -6,6 +6,7 @@ The BaseModel class contain attr and method common to all classes
 """
 from uuid import uuid4
 from datetime import datetime
+from . import storage
 # import models
 
 
@@ -60,9 +61,11 @@ class BaseModel:
         with the current datetime
         """
         # from models import storage
+        storage.save()
         self.updated_at = datetime.now()
         # models.storage.new(self)
-        # models.storage.save()
+        
+
 
     def to_dict(self):
         """

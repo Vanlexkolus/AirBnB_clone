@@ -24,7 +24,7 @@ class FileStorage:
 
     def all(self):
         """Return the dictionary __object"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """set in __object:
