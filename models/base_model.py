@@ -4,22 +4,26 @@ Module base_model
 This module contain base class(BaseNodel).
 The BaseModel class contain attr and method common to all classes
 """
-import uuid
+from uuid import uuid4
 from datetime import datetime
 # from models import storage
 
 
 class BaseModel:
     """
-    The BaseModel is a class that defines all common attributes/methods
-    for other classes
+    Base clas for Airbnb clone project
+    Methods:
+        __init__(self, *args, **kwargs)
+        __str__(self)
+        __save__(self)
+        to_dict(self)
     """
 
     def __init__(self, *args, **kwargs):
         """
         Initialization of public attributes
         """
-        self.id = str(uuid.uuid4())
+        self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
@@ -32,7 +36,7 @@ class BaseModel:
                     else:
                         setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
+            self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
 
@@ -41,7 +45,7 @@ class BaseModel:
         This method prints:
         [<class name>] (<self.id>) <self.__dict__>
         """
-        return (f"{[self.__class__.__name__]}, {self.id}, {self.__dict__}")
+        return (f"{[self.__class__.__name__]}, ({self.id}), {self.__dict__}")
 
     def save(self):
         """
