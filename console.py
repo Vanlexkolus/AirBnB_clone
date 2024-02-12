@@ -4,11 +4,14 @@ Module console
 This moulde contain the entry point to a command interpreter
 """
 import cmd
+from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """prompt user"""
     prompt = "(hbnb) "
+    classes = ("BaseModel")
 
     def do_quit(self, line):
         """Quit command to exist the program"""
@@ -22,6 +25,17 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """called when an empty line is entered"""
         pass
+
+    def do_create(self, arg):
+        if len(arg) == 0:
+            print("** class name missing **")
+            return
+        if arg.strip() in HBNBCommand.classes:
+            theObj = eval(arg.strip())
+            storage.save()
+            print(theObj.id)
+        elif arg.strip() not in HBNBCommand.classes:
+            print("** class doesn't exist **")
 
 
 if __name__ == "__main__":
