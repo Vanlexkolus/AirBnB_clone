@@ -31,7 +31,7 @@ class FileStorage:
         """set in __object:
             the obj with the key <obj class name>.id
         """
-        key = "{}.{}".format(obj.__class__.name__, obj.id)
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
 
     def save(self):
@@ -51,5 +51,5 @@ class FileStorage:
                 tmp = json.load(f)
                 for key, val in tmp.items():
                     self.all()[key] = classes[val['__class__']](**val)
-        except FileFOundError:
-            pass 
+        except FileNotFoundError:
+            pass

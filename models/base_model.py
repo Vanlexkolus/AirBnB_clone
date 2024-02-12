@@ -6,8 +6,7 @@ The BaseModel class contain attr and method common to all classes
 """
 from uuid import uuid4
 from datetime import datetime
-from . import storage
-# import models
+import models
 
 
 class BaseModel:
@@ -41,6 +40,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -48,7 +48,7 @@ class BaseModel:
         [<class name>] (<self.id>) <self.__dict__>
         """
         return (f"{[self.__class__.__name__]}, ({self.id}), {self.__dict__}")
-    
+
     def __repr__(self):
         """
         return string representation
@@ -63,9 +63,6 @@ class BaseModel:
         from models import storage
         self.updated_at = datetime.now()
         storage.save()
-        #models.storage.new(self)
-        
-
 
     def to_dict(self):
         """
