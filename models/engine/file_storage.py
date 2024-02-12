@@ -4,6 +4,7 @@ module file_storage
 This moulde conatian a class FileStorage
 """
 import json
+from models.base_model import BaseModel
 import os
 
 
@@ -30,8 +31,8 @@ class FileStorage:
         """set in __object:
             the obj with the key <obj class name>.id
         """
-        key = "{}.{}".format(__class__.__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        key = "{}.{}".format(obj.__class__.name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
         """serilaize __object to JSOn file"""
@@ -44,6 +45,11 @@ class FileStorage:
 
     def reload(self):
         """deserialize the Json file to __objects"""
-        if os.path.exists(FileStorage.__file_path):
+        try:
+            tmp = {}
             with open(FileStorage.__file_path, 'r') as f:
-                json_dict = json.loads(f.read())
+                tmp = json.load(f)
+                for key, val in tmp.items():
+                    self.all()[key] = classes[val['__class__']](**val)
+        except FileFOundError:
+            pass 
