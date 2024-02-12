@@ -36,20 +36,26 @@ class FileStorage:
 
     def save(self):
         """serilaize __object to JSOn file"""
-        with open(FileStorage.__file_path, 'w') as f:
-            tmp = {}
-            tmp.update(FileStorage.__objects)
-            for key, val in tmp.items():
-                tmp[key] = val.to_dict()
-            json.dump(tmp, f)
+        my_dict = {}
+
+        for key, obj in self.__objects.items():
+            '''if type(obj) is dict:
+            my_dict[key] = obj
+            else'''
+            my_dict[key] = obj.to_dict()
+            with open(self.__file_path, 'w') as f:
+                json.dump(my_dict, f)
 
     def reload(self):
         """deserialize the Json file to __objects"""
         try:
-            tmp = {}
-            with open(FileStorage.__file_path, 'r') as f:
-                tmp = json.load(f)
-                for key, val in tmp.items():
-                    self.all()[key] = classes[val['__class__']](**val)
+            with open(self.__file_path, 'r') as f:
+                new_obj = json.load(f)
+                for key, value in new_obj.items():
+                    class_name, obj_id = key.split('.')
+                    cls = globals().get(class_name)
+                    if cls:
+                        obj = cls(**value)
+                        self.__objects[key] = obj
         except FileNotFoundError:
             pass
