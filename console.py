@@ -42,16 +42,31 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
             print(new_instance.id)
     
-    def do_show(self, arg):
+    def do_show(self, args):
         """
         This prints the string representation of
         an instance based on the class name and id
         """
-        if arg == 0:
+        new = args.partition(" ")
+        class_name = new[0]
+        class_id = new[2]
+
+        if not class_name:
             print("** class name missing **")
-        if arg not in HBNBCommand.classes:
+            return
+
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
-        ##
+
+        if not class_id:
+            print("** instance id missing **")
+            return
+        key = class_name + "." + class_id
+
+        try:
+            print(storage._FileStorage__objects[key])
+        except KeyError:
+            print("** no instance found **")
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
