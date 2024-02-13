@@ -30,16 +30,14 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        #if arg.strip() in HBNBCommand.classes:
-            #theObj = eval(arg.strip())
-            #storage.save()
-            #print(theObj.id)
-        elif arg.strip() not in HBNBCommand.classes:
+        
+        if arg.strip() not in HBNBCommand.classes:
             print("** class doesn't exist **")
-
-        new_instance = BaseModel()
-        storage.save()
-        print(new_instance.id)
+            
+        else:
+            new_instance = BaseModel()
+            storage.save()
+            print(new_instance.id)
 
 
 if __name__ == "__main__":
