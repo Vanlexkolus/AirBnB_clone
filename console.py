@@ -27,6 +27,9 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
+        """
+        Creates a new class instance like BaseModel
+        """
         if len(arg) == 0:
             print("** class name missing **")
             return
@@ -38,7 +41,13 @@ class HBNBCommand(cmd.Cmd):
             new_instance = BaseModel()
             storage.save()
             print(new_instance.id)
-
+    
+    def do_show(self, arg):
+        """
+        This prints the string representation of
+        an instance based on the class name and id
+        """
+        
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
