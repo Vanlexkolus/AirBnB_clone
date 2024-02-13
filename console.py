@@ -68,5 +68,27 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** no instance found **")
 
+    def do_destroy(self, args):
+        new = args.partition(" ")
+        class_name = new[0]
+        class_id = new[2]
+
+        if not class_name:
+            print("** class name missing **")
+            return
+
+        if class_name not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+        if not class_id:
+            print("** instnace id missing **")
+
+        key = class_name + "." + class_id
+        try:
+            del(storage.all()[key])
+            storage.save()
+        except:
+            print("** no instance found **")
+
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
