@@ -17,10 +17,18 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exist the program"""
         return True
 
+    def help_quit(self):
+        """Method to exit the HBNB console"""
+        print("Exit the program with formatting\n")
+
     def do_EOF(self, line):
         """Exit program"""
         print("")
         return True
+
+    def help_EOF(self):
+        """ Handle EOF to exit program """
+        print("Exits the program without formatting\n")
 
     def emptyline(self):
         """called when an empty line is entered"""
@@ -33,15 +41,18 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        
         if arg.strip() not in HBNBCommand.classes:
             print("** class doesn't exist **")
-            
         else:
             new_instance = BaseModel()
             storage.save()
             print(new_instance.id)
-    
+
+    def help_create(self):
+        """ Help info for the create command """
+        print("Creates a class of any type")
+        print("[Usage]: create <className>\n")
+
     def do_show(self, args):
         """
         This prints the string representation of
@@ -68,6 +79,11 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** no instance found **")
 
+    def help_show(self):
+        """ Help information for show command """
+        print("Show an individual instance of a class")
+        print("[Usage]: sho <className> <objectId>\n")
+
     def do_destroy(self, args):
         new = args.partition(" ")
         class_name = new[0]
@@ -86,8 +102,13 @@ class HBNBCommand(cmd.Cmd):
         try:
             del(storage.all()[key])
             storage.save()
-        except:
+        except KeyError:
             print("** no instance found **")
+
+    def help_destroy(self):
+        """ Help information for the destroy command """
+        print("Destroy an individual instance of a class")
+        print("[Usage]: destroy <className> <objectId\n")
 
 
 if __name__ == "__main__":
