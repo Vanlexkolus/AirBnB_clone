@@ -1,0 +1,12 @@
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    align-items: right;
+}
+
+p{
+    color: #484848;
+    font-size: 14px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-align: center;
+}
