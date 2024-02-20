@@ -6,7 +6,7 @@
     border-radius: 4px;
     align-items: center;
     display: flex;
-    justify-content: right;
+    justify-content: left;
     padding: 0 20px;
 }
 
@@ -24,18 +24,29 @@ button {
 
 .search-button:hover {
     opacity: 90%;
+    
 }
 
 .locations {
-    display: inline-block;
     height: 100%;
     width: 25%;
-    border-right: #DDDDDD;
+    border-right: 1px solid #DDDDDD ;
 }
 
 .amenities {
-    display: inline-block;
     height: 100%;
     width: 25%;
-    border-right: #DDDDDD;
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+h3 {
+    font-weight: 600p;
+    line-height: 5px;
+}
+
+
+h4 {
+    font-weight: 400;
+    font-size: 14px;
 }
